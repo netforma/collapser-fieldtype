@@ -1,0 +1,35 @@
+{
+    "name": "netforma/collapser-fieldtype",
+    "autoload": {
+        "psr-4": {
+            "Netforma\\Collapser\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Netforma\\Collapser\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "statamic/cms": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Collapser",
+            "description": "Collapser fieldtype"
+        },
+        "laravel": {
+            "providers": [
+                "Netforma\\Collapser\\ServiceProvider"
+            ]
+        }
+    }
+}
