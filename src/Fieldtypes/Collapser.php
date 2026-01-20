@@ -13,6 +13,8 @@ class Collapser extends Fieldtype
 {
     protected $categories = ['structured'];
 
+    protected $icon = 'collapse';
+
     protected $defaultable = false;
 
     protected $defaultValue = [];
@@ -134,7 +136,7 @@ class Collapser extends Fieldtype
 
     private function gqlItemTypeName()
     {
-        return 'Group_'.collect($this->field->handlePath())->map(function ($part) {
+        return 'Collapser_'.collect($this->field->handlePath())->map(function ($part) {
             return Str::studly($part);
         })->join('_');
     }

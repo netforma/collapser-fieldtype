@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, inject } from 'vue';
 import { PublishFields, PublishFieldsProvider, publishContextKey, Icon } from '@statamic/cms/ui';
-import { marked } from 'marked';
 
 const props = defineProps({
     config: Object,
@@ -10,16 +9,11 @@ const props = defineProps({
     handle: String,
     fieldPathPrefix: String,
     metaPathPrefix: String,
-    readOnly: Boolean,
 });
 
 const publishContext = inject(publishContextKey, null);
 
 const isOpen = ref(false);
-
-const markdownInstructions = computed(() => {
-    return marked.parse(props.config.instructions || '');
-});
 
 const nestedFieldPathPrefix = computed(() => {
     return props.fieldPathPrefix ? `${props.fieldPathPrefix}.${props.handle}` : props.handle;
@@ -52,9 +46,14 @@ function toggle() {
             class="flex items-center gap-2 px-3 py-2 cursor-pointer select-none transition-colors duration-150"
             :class="{
                 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800': !isOpen,
-                'bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-white/10': isOpen
+                'bg-gray-100 dark:bg-gray-800': isOpen
             }"
+            role="button"
+            tabindex="0"
+            :aria-expanded="isOpen"
             @click="toggle"
+            @keydown.enter="toggle"
+            @keydown.space.prevent="toggle"
         >
             <Icon
                 name="chevron-right"
@@ -75,12 +74,6 @@ function toggle() {
         </header>
 
         <div v-show="isOpen" class="bg-white dark:bg-gray-900">
-            <div
-                v-if="config.instructions"
-                class="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700"
-                v-html="markdownInstructions"
-            />
-
             <div class="publish-fields @container">
                 <PublishFieldsProvider
                     :fields="config.fields"
