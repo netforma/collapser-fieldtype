@@ -67,16 +67,14 @@ function toggle() {
         </header>
 
         <div v-show="isOpen" class="bg-white dark:bg-gray-900">
-            <div class="publish-fields @container">
-                <PublishFieldsProvider
-                    :fields="config.fields"
-                    :as-config="false"
-                    :field-path-prefix="nestedFieldPathPrefix"
-                    :meta-path-prefix="nestedMetaPathPrefix"
-                >
-                    <PublishFields class="p-4" />
-                </PublishFieldsProvider>
-            </div>
+            <PublishFieldsProvider
+                :fields="config.fields"
+                :as-config="false"
+                :field-path-prefix="nestedFieldPathPrefix"
+                :meta-path-prefix="nestedMetaPathPrefix"
+            >
+                <PublishFields class="p-4" />
+            </PublishFieldsProvider>
         </div>
     </div>
 </template>
